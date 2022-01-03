@@ -1,0 +1,214 @@
+---
+title: 'LUCAS Model Version 1.0: User''s Guide'
+author: "Benjamin M. Sleeter"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography:
+- book.bib
+- packages.bib
+url: https://github.com/bsleeter/lucas-user-guide
+cover-image: images/ui.jpg
+description: |
+  This is a minimal example of using the bookdown package to write a book.
+  set in the _output.yml file.
+  The HTML output format for this example is bookdown::gitbook,
+link-citations: yes
+github-repo: github.com/bsleeter/lucas-user-guide
+editor_options: 
+  chunk_output_type: inline
+---
+
+This chapter provides an overview of the Land Use and Carbon Scenario Simulator, or LUCAS model, and how the model can be used to produce historical and future maps of land use and land cover change and ecosystem carbon dynamics. Here we introduce the major concepts and steps needed to build and run the LUCAS model.
+
+# About the LUCAS Model
+
+The LUCAS model [@sleeter2018effects] was developed through a collaboration between researchers at the [U.S. Geological Survey](http://usgs.gov "U.S. Geological Survey") and [Apex Resource Management Solutions](https://apexrms.com/ "Apex RMS"), developers of the [SyncroSim](http://syncrosim.com "SyncroSim") software application. The LUCAS model is an approach to modeling the effects of climate and land-use change on ecosystem carbon dynamics and runs within the SyncroSim modeling environment. The LUCAS approach integrates two main modeling approaches: 1) a state-and-transition simulation model of LULC change [@daniel2016state] , and 2) a stock-flow model of carbon dynamics [@daniel2018integrating]. The LUCAS approach to modeling LULC change has been used for a wide variety of research purposes, including coastal hazards, water use, LULC change, and ecosystem carbon balance. The model can be configured to run over historical or projected time periods (or both), can be developed to be spatially explicit or spatially referenced, and can be customized to include a wide range of state types (e.g., LULC classes) and transitions.
+
+This user's guide describes the main concepts and methods required to build and run a fully coupled model of LULC change and ecosystem carbon dynamics. It does not provide detailed explanations of the underlying algorithms and methods used to produce results. For details on specific model parameters and methods used, see the associated list of references in Appendix A.
+
+## State-and transition simulation models (STSM)
+
+The LUCAS model uses a state-and-transition simulation model (STSM) to represent user defined landscapes and the changes occurring between them. STSM's divide a landscape into a discrete set of spatial units which represent specific LULC classes. The number of classes is defined by the user, but is generally aligned with existing LULC classification efforts. Within a STSM, time is represented by discrete steps, such as days, months, or most commonly in years. However, the generic nature of STSM's allow models to be developed based on virtually any discrete measure of time. The change between different state classes is represented as a stochastic process with rates of change expressed as probabilities. A thorough description of STSM's can be found in @daniel2016state.
+
+The SyncroSim modeling environment provides a wide range of options for representing LULC change. In addition to defining LULC types, the software allows for up to three additional landscape stratification levels. For spatially explicit models, users have the ability to further define model parameters at the pixel scale. In \@ref(fig:threeboxmodel) we show a simple 3-box STSM model used to represent land cover changes resulting from changes due to forest harvest, regrowth, and urbanization. Additional detail can be added to a relatively simple model through the use of strata. For example, the same 3-box model could be parameterized differently based on the unique combination of three strata, such as ecological regions, administrative boundaries, and ownership categories. For the U.S., such a model could take the form of 85 unique ecological regions, 48 states (in the conterminous U.S.), and two ownership classes (e.g. public versus private). The resulting model could therefor have $85*48*2$ unique parameterizations of the 5 transition probabilities specified in this example.
+
+```{r threeboxmodel, echo=F, warning=F, message=F, fig.height=3, fig.cap="Example of a simple three box state-and-transition simulation model showing transitions between three forest types resulting from fire and harvest."}
+DiagrammeR::grViz("digraph {
+  graph [layout = dot, rankdir = TB]
+  
+  node [shape = rectangle, width=1, fontname = Helvetica, fixedsize = true, fontsize = 8]       
+  f [label = 'Forest']
+  gs [label = 'Grass/Shrub']
+  d [label =  'Developed']
+  
+  # edge definitions with the node IDs
+  edge [fontname = Helvetica, fontsize = 8, color = black, arrowsize = 0.5]
+  f -> gs [label = 'Harvest']
+  gs -> f [label = 'Regrowth']
+  {f, gs} -> d [label = 'Urbanization']
+
+  {rank = same; f, gs, d}
+  }")
+```
+
+## Carbon stock-flow models (SF)
+
+LUCAS uses a stock and flow approach to represent the storage and movement of carbon between various ecosystem pools. The flow or transfer of carbon is referred to as carbon flux. The stock-flow approach can be developed to represent any number of carbon pools and fluxes, provided model parameters can be obtained. Two basic types of fluxes are modeled, automatic or base fluxes, and event or transition-triggered fluxes. Automatic fluxes occur in each timestep and represent the natural transfer of carbon through basic environmental processes, such as mortality, decay and decomposition, and emission. Event fluxes refer to an additional set of fluxes occurring when a transition is evoked within the STSM. For example, when wildfire is simulated on a state class within the STSM, an additional set of fluxes occurs to represent combustion and mortality. Likewise, when harvest is evoked on a state class, event flows are used to transfer carbon from live pools to the forestry sector (e.g. harvested wood products).
+
+Building on the example in Figure \@ref(fig:threeboxmodel), Figure \@ref(fig:stockflowmodel) shows a simple carbon stock-flow model for forests using a basic set of carbon pools. In this simple example, black arrows (e.g., flows) denote automatic flows which occur in every timestep of the model run. The red arrows denote event flows which only occur when a specified transition occurs, in this case harvest from Figure \@ref(fig:threeboxmodel).
+
+```{r stockflowmodel, echo=F, warning=F, message=F, fig.cap="Example of a simple carbon stock-flow model for coniferous forests."}
+DiagrammeR::grViz("digraph {
+  graph [layout = dot, rankdir = TB]
+  
+  node [shape = rectangle, width=1, fontname = Helvetica, fixedsize = true, fontsize = 8]       
+  l [label = 'Live']
+  d [label = 'Dead']
+  li [label =  'Litter']
+  s [label =  'Soil']
+  a [label = 'Atmosphere']
+  hwp [label = 'HWP']
+  
+  # edge definitions with the node IDs
+  edge [fontname = Helvetica, fontsize = 8, color = black, arrowsize = 0.5]
+  a -> l [label = 'Growth']
+  l -> d [label = 'Mortality']
+  l -> li [label = 'Litterfall']
+  d -> li [label = 'Deadfall']
+  li -> s [label = 'Decomposition']
+  {li, d, s} -> a [label = 'Emission']
+  l -> a [label = 'Emission', color = red]
+  l -> hwp [label = 'Harvest', color = red]
+                  {rank = same; hwp, a}
+                  {rank = same; l, d, li, s}
+
+
+  }")
+```
+
+## Representation of space
+
+The LUCAS model can be configured as either a spatially explicit or spatially referenced model. Spatially explicit models use raster grids to represent real locations in geographic space. Alternatively, spatially referenced models use a series of spatial strata (e.g. ecological regions, administrative boundaries) to generalize the model inputs. Results from a spatially referenced model provide totals for a given strata, but not any additional detail within the strata, whereas spatially explicit models provide output results at the same raster resolution as the spatial inputs. Given this flexibility, LUCAS can be used to simulate carbon dynamics from a single stand up to landscapes containing tens of millions of cells.
+
+```{r spatialexample, echo=F, warning=F, message=F, fig.height=4, fig.cap="Example of a spatially referenced model input (left) and a spatially explicit model (right)."}
+library(raster)
+library(tmap)
+
+eco = raster("data/initial-conditions/multi-processing-regions-16.tif")
+sc = raster("data/initial-conditions/state-class-forest-group.tif")
+sc = reclassify(sc, c(99,Inf,41))
+
+p1 = tm_shape(eco) +
+  tm_raster(legend.show=F, style="cat", n=16, palette = "Set2")
+
+p2 = tm_shape(sc) +
+  tm_raster(legend.show=F, style="cat", palette = "Set2")
+
+p3 = tmap_arrange(p1, p2, nrow = 1)
+p3
+```
+
+## Representation of time
+
+The LUCAS model runs on an annual timestep. Both STSM and SF parameters are derived at this scale. For example, rates of LULC change are defined as the rate of change -- as either an explicit area or probability -- occurring between two successive years. Within the stock-flow model, carbon fluxes are defined as a proportion of the "from stock" transferred to the "to stock" each year.
+
+Conceptually there is no reason why models could not be developed with shorter or longer temporal intervals. For example, a model could be developed to use monthly climate data in an effort to model wildfire patterns across an ecosystem. This may be advantageous if the goal of the modeling effort is to represent temporal dynamics of fire behavior in response to variability in weather patterns within a year. Conversely, models could be developed to operate on decadal scales when the processes considered allow for that level of temporal aggregation. For example, data from global integrated assessment models could be used to provide decadal estimates of urbanization over long temporal periods.
+
+## Uncertainty
+
+Various types of uncertainty can be incorporated into the LUCAS model. Different categories of uncertainty include user input data, ecological processes, and model algorithms. Within LUCAS, virtually all parameters can be assigned statistical distributions, which in turn can be sampled using Monte Carlo methods.
+
+### User input data
+
+### Ecological processes
+
+### Model algorithms
+
+## Structure of LUCAS
+
+The LUCAS model uses national remote sensing products to drive historical rates of change. The carbon stock-flow model was developed by linking the CBM-CFS3 model to derive a range of carbon flux parameters.
+
+```{r lucasstructure, echo=F, warning=F, message=F, fig.cap="Structure and steps to building a LUCAS model"}
+DiagrammeR::grViz("digraph {
+  graph [layout = dot, rankdir = TB]
+  
+  node [shape = rectangle, width=1, fontname = Helvetica, fixedsize = true, fontsize = 8]       
+  setup [label = 'Model Set-up']
+  scenario [label = 'Define scenarios']
+  run [label =  'Run simulations']
+  post [label =  'Post Processing']
+  
+  # edge definitions with the node IDs
+  edge [fontname = Helvetica, fontsize = 8, color = black, arrowsize = 0.5]
+  setup -> scenario
+  scenario -> run
+  run -> post
+  post -> scenario
+                {rank = same; setup, scenario, run, post}
+
+  }")
+```
+
+Using the LUCAS model require four general operational steps (Figure \@ref(fig:lucasstructure)). Each step is described below.
+
+### Model Set-up
+
+A base LUCAS model is available which can be adapted for a wide range of user needs. The model contains a range of LULC transitions such as urbanization, agricultural expansion and contraction, forest harvest, wildfire, and insect/drought disturbance. The base model classifies forests into 28 forest type-groups based on the U.S. Forest Service classification system. For each forest type-group, a set of carbon stock-flow parameters are provided. Users need to define the following:
+
+-   Choose between using the LUCAS Base model or developing a custom model. The base model comes with a calibrated stock flow model for 28 forest type-groups. Developing a custom model requires additional steps, including:
+
+    -   Obtaining merchantable volume curves,
+
+    -   Running CBM-CFS3 to estimate live biomass carbon by forest age,
+
+    -   Running the LUCAS CBM-CFS3 Flow Pathways module,
+
+    -   Running the LUCAS Spin-up module.
+
+-   Defining the study area and model strata,
+
+-   Determining whether the model will be spatially explicit or spatially referenced,
+
+-   Define the temporal period of analysis (historical and/or future projections),
+
+-   Defining a LULC classification system and set of LULC transitions.
+
+### Define Scenarios
+
+### Run Simulations
+
+### Post Processing 
+
+## Information and data requirements
+
+## Bookdown Text - to be deleted
+
+You can render the HTML version of this example book without changing anything:
+
+1.  Find the **Build** pane in the RStudio IDE, and
+
+2.  Click on **Build Book**, then select your output format, or select "All formats" if you'd like to use multiple formats from the same book source files.
+
+Or build the book from the R console:
+
+```{r, eval=FALSE}
+bookdown::render_book()
+```
+
+To render this example to PDF as a `bookdown::pdf_book`, you'll need to install XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <https://yihui.org/tinytex/>.
+
+## Preview book
+
+As you work, you may start a local server to live preview this HTML book. This preview will update as you edit the book when you save individual .Rmd files. You can start the server in a work session by using the RStudio add-in "Preview book", or from the R console:
+
+```{r eval=FALSE}
+bookdown::serve_book()
+```
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```

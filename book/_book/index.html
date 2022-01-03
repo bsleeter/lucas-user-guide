@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>LUCAS Model Version 1.0: User’s Guide</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+set in the _output.yml file.
+The HTML output format for this example is bookdown::gitbook,</p>" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="LUCAS Model Version 1.0: User’s Guide" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://github.com/bsleeter/lucas-user-guide" />
+  <meta property="og:image" content="https://github.com/bsleeter/lucas-user-guide/images/ui.jpg" />
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+set in the _output.yml file.
+The HTML output format for this example is bookdown::gitbook,</p>" />
+  <meta name="github-repo" content="github.com/bsleeter/lucas-user-guide" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="LUCAS Model Version 1.0: User’s Guide" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+set in the _output.yml file.
+The HTML output format for this example is bookdown::gitbook,</p>" />
+  <meta name="twitter:image" content="https://github.com/bsleeter/lucas-user-guide/images/ui.jpg" />
+
+<meta name="author" content="Benjamin M. Sleeter" />
+
+
+<meta name="date" content="2021-12-30" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="hello-bookdown.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="libs/viz-1.8.2/viz.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/grViz-binding-1.0.6.1/grViz.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About the LUCAS Model</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#state-and-transition-simulation-models-stsm"><i class="fa fa-check"></i><b>1.1</b> State-and transition simulation models (STSM)</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#carbon-stock-flow-models-sf"><i class="fa fa-check"></i><b>1.2</b> Carbon stock-flow models (SF)</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#representation-of-space"><i class="fa fa-check"></i><b>1.3</b> Representation of space</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#representation-of-time"><i class="fa fa-check"></i><b>1.4</b> Representation of time</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#uncertainty"><i class="fa fa-check"></i><b>1.5</b> Uncertainty</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="index.html"><a href="index.html#user-input-data"><i class="fa fa-check"></i><b>1.5.1</b> User input data</a></li>
+<li class="chapter" data-level="1.5.2" data-path="index.html"><a href="index.html#ecological-processes"><i class="fa fa-check"></i><b>1.5.2</b> Ecological processes</a></li>
+<li class="chapter" data-level="1.5.3" data-path="index.html"><a href="index.html#model-algorithms"><i class="fa fa-check"></i><b>1.5.3</b> Model algorithms</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#structure-of-lucas"><i class="fa fa-check"></i><b>1.6</b> Structure of LUCAS</a>
+<ul>
+<li class="chapter" data-level="1.6.1" data-path="index.html"><a href="index.html#model-set-up"><i class="fa fa-check"></i><b>1.6.1</b> Model Set-up</a></li>
+<li class="chapter" data-level="1.6.2" data-path="index.html"><a href="index.html#define-scenarios"><i class="fa fa-check"></i><b>1.6.2</b> Define Scenarios</a></li>
+<li class="chapter" data-level="1.6.3" data-path="index.html"><a href="index.html#run-simulations"><i class="fa fa-check"></i><b>1.6.3</b> Run Simulations</a></li>
+<li class="chapter" data-level="1.6.4" data-path="index.html"><a href="index.html#post-processing"><i class="fa fa-check"></i><b>1.6.4</b> Post Processing</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7" data-path="index.html"><a href="index.html#information-and-data-requirements"><i class="fa fa-check"></i><b>1.7</b> Information and data requirements</a></li>
+<li class="chapter" data-level="1.8" data-path="index.html"><a href="index.html#bookdown-text---to-be-deleted"><i class="fa fa-check"></i><b>1.8</b> Bookdown Text - to be deleted</a></li>
+<li class="chapter" data-level="1.9" data-path="index.html"><a href="index.html#preview-book"><i class="fa fa-check"></i><b>1.9</b> Preview book</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="hello-bookdown.html"><a href="hello-bookdown.html"><i class="fa fa-check"></i><b>2</b> Hello bookdown</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="hello-bookdown.html"><a href="hello-bookdown.html#a-section"><i class="fa fa-check"></i><b>2.1</b> A section</a>
+<ul>
+<li class="chapter" data-level="" data-path="hello-bookdown.html"><a href="hello-bookdown.html#an-unnumbered-section"><i class="fa fa-check"></i>An unnumbered section</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="cross.html"><a href="cross.html"><i class="fa fa-check"></i><b>3</b> Cross-references</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="cross.html"><a href="cross.html#chapters-and-sub-chapters"><i class="fa fa-check"></i><b>3.1</b> Chapters and sub-chapters</a></li>
+<li class="chapter" data-level="3.2" data-path="cross.html"><a href="cross.html#captioned-figures-and-tables"><i class="fa fa-check"></i><b>3.2</b> Captioned figures and tables</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="parts.html"><a href="parts.html"><i class="fa fa-check"></i><b>4</b> Parts</a></li>
+<li class="chapter" data-level="5" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html"><i class="fa fa-check"></i><b>5</b> Footnotes and citations</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html#footnotes"><i class="fa fa-check"></i><b>5.1</b> Footnotes</a></li>
+<li class="chapter" data-level="5.2" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html#citations"><i class="fa fa-check"></i><b>5.2</b> Citations</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="blocks.html"><a href="blocks.html"><i class="fa fa-check"></i><b>6</b> Blocks</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="blocks.html"><a href="blocks.html#equations"><i class="fa fa-check"></i><b>6.1</b> Equations</a></li>
+<li class="chapter" data-level="6.2" data-path="blocks.html"><a href="blocks.html#theorems-and-proofs"><i class="fa fa-check"></i><b>6.2</b> Theorems and proofs</a></li>
+<li class="chapter" data-level="6.3" data-path="blocks.html"><a href="blocks.html#callout-blocks"><i class="fa fa-check"></i><b>6.3</b> Callout blocks</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="sharing-your-book.html"><a href="sharing-your-book.html"><i class="fa fa-check"></i><b>7</b> Sharing your book</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="sharing-your-book.html"><a href="sharing-your-book.html#publishing"><i class="fa fa-check"></i><b>7.1</b> Publishing</a></li>
+<li class="chapter" data-level="7.2" data-path="sharing-your-book.html"><a href="sharing-your-book.html#pages"><i class="fa fa-check"></i><b>7.2</b> 404 pages</a></li>
+<li class="chapter" data-level="7.3" data-path="sharing-your-book.html"><a href="sharing-your-book.html#metadata-for-sharing"><i class="fa fa-check"></i><b>7.3</b> Metadata for sharing</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">LUCAS Model Version 1.0: User’s Guide</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">LUCAS Model Version 1.0: User’s Guide</h1>
+<p class="author"><em>Benjamin M. Sleeter</em></p>
+<p class="date"><em>2021-12-30</em></p>
+</div>
+<div id="about-the-lucas-model" class="section level1" number="1">
+<h1><span class="header-section-number">Chapter 1</span> About the LUCAS Model</h1>
+<p>The LUCAS model <span class="citation">(<a href="#ref-sleeter2018effects" role="doc-biblioref">Sleeter et al. 2018</a>)</span> was developed through a collaboration between researchers at the <a href="http://usgs.gov" title="U.S. Geological Survey">U.S. Geological Survey</a> and <a href="https://apexrms.com/" title="Apex RMS">Apex Resource Management Solutions</a>, developers of the <a href="http://syncrosim.com" title="SyncroSim">SyncroSim</a> software application. The LUCAS model is an approach to modeling the effects of climate and land-use change on ecosystem carbon dynamics and runs within the SyncroSim modeling environment. The LUCAS approach integrates two main modeling approaches: 1) a state-and-transition simulation model of LULC change <span class="citation">(<a href="#ref-daniel2016state" role="doc-biblioref">Daniel et al. 2016</a>)</span> , and 2) a stock-flow model of carbon dynamics <span class="citation">(<a href="#ref-daniel2018integrating" role="doc-biblioref">Daniel et al. 2018</a>)</span>. The LUCAS approach to modeling LULC change has been used for a wide variety of research purposes, including coastal hazards, water use, LULC change, and ecosystem carbon balance. The model can be configured to run over historical or projected time periods (or both), can be developed to be spatially explicit or spatially referenced, and can be customized to include a wide range of state types (e.g., LULC classes) and transitions.</p>
+<p>This user’s guide describes the main concepts and methods required to build and run a fully coupled model of LULC change and ecosystem carbon dynamics. It does not provide detailed explanations of the underlying algorithms and methods used to produce results. For details on specific model parameters and methods used, see the associated list of references in Appendix A.</p>
+<div id="state-and-transition-simulation-models-stsm" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> State-and transition simulation models (STSM)</h2>
+<p>The LUCAS model uses a state-and-transition simulation model (STSM) to represent user defined landscapes and the changes occurring between them. STSM’s divide a landscape into a discrete set of spatial units which represent specific LULC classes. The number of classes is defined by the user, but is generally aligned with existing LULC classification efforts. Within a STSM, time is represented by discrete steps, such as days, months, or most commonly in years. However, the generic nature of STSM’s allow models to be developed based on virtually any discrete measure of time. The change between different state classes is represented as a stochastic process with rates of change expressed as probabilities. A thorough description of STSM’s can be found in <span class="citation"><a href="#ref-daniel2016state" role="doc-biblioref">Daniel et al.</a> (<a href="#ref-daniel2016state" role="doc-biblioref">2016</a>)</span>.</p>
+<p>The SyncroSim modeling environment provides a wide range of options for representing LULC change. In addition to defining LULC types, the software allows for up to three additional landscape stratification levels. For spatially explicit models, users have the ability to further define model parameters at the pixel scale. In <a href="index.html#fig:threeboxmodel">1.1</a> we show a simple 3-box STSM model used to represent land cover changes resulting from changes due to forest harvest, regrowth, and urbanization. Additional detail can be added to a relatively simple model through the use of strata. For example, the same 3-box model could be parameterized differently based on the unique combination of three strata, such as ecological regions, administrative boundaries, and ownership categories. For the U.S., such a model could take the form of 85 unique ecological regions, 48 states (in the conterminous U.S.), and two ownership classes (e.g. public versus private). The resulting model could therefor have <span class="math inline">\(85*48*2\)</span> unique parameterizations of the 5 transition probabilities specified in this example.</p>
+<div class="figure"><span style="display:block;" id="fig:threeboxmodel"></span>
+<div id="htmlwidget-bdd3f13e2db82780727e" style="width:672px;height:288px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-bdd3f13e2db82780727e">{"x":{"diagram":"digraph {\n  graph [layout = dot, rankdir = TB]\n  \n  node [shape = rectangle, width=1, fontname = Helvetica, fixedsize = true, fontsize = 8]       \n  f [label = \"Forest\"]\n  gs [label = \"Grass/Shrub\"]\n  d [label =  \"Developed\"]\n  \n  # edge definitions with the node IDs\n  edge [fontname = Helvetica, fontsize = 8, color = black, arrowsize = 0.5]\n  f -> gs [label = \"Harvest\"]\n  gs -> f [label = \"Regrowth\"]\n  {f, gs} -> d [label = \"Urbanization\"]\n\n  {rank = same; f, gs, d}\n  }","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figure 1.1: Example of a simple three box state-and-transition simulation model showing transitions between three forest types resulting from fire and harvest.
+</p>
+</div>
+</div>
+<div id="carbon-stock-flow-models-sf" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Carbon stock-flow models (SF)</h2>
+<p>LUCAS uses a stock and flow approach to represent the storage and movement of carbon between various ecosystem pools. The flow or transfer of carbon is referred to as carbon flux. The stock-flow approach can be developed to represent any number of carbon pools and fluxes, provided model parameters can be obtained. Two basic types of fluxes are modeled, automatic or base fluxes, and event or transition-triggered fluxes. Automatic fluxes occur in each timestep and represent the natural transfer of carbon through basic environmental processes, such as mortality, decay and decomposition, and emission. Event fluxes refer to an additional set of fluxes occurring when a transition is evoked within the STSM. For example, when wildfire is simulated on a state class within the STSM, an additional set of fluxes occurs to represent combustion and mortality. Likewise, when harvest is evoked on a state class, event flows are used to transfer carbon from live pools to the forestry sector (e.g. harvested wood products).</p>
+<p>Building on the example in Figure <a href="index.html#fig:threeboxmodel">1.1</a>, Figure <a href="index.html#fig:stockflowmodel">1.2</a> shows a simple carbon stock-flow model for forests using a basic set of carbon pools. In this simple example, black arrows (e.g., flows) denote automatic flows which occur in every timestep of the model run. The red arrows denote event flows which only occur when a specified transition occurs, in this case harvest from Figure <a href="index.html#fig:threeboxmodel">1.1</a>.</p>
+<div class="figure"><span style="display:block;" id="fig:stockflowmodel"></span>
+<div id="htmlwidget-bfc767dad7be065ae509" style="width:672px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-bfc767dad7be065ae509">{"x":{"diagram":"digraph {\n  graph [layout = dot, rankdir = TB]\n  \n  node [shape = rectangle, width=1, fontname = Helvetica, fixedsize = true, fontsize = 8]       \n  l [label = \"Live\"]\n  d [label = \"Dead\"]\n  li [label =  \"Litter\"]\n  s [label =  \"Soil\"]\n  a [label = \"Atmosphere\"]\n  hwp [label = \"HWP\"]\n  \n  # edge definitions with the node IDs\n  edge [fontname = Helvetica, fontsize = 8, color = black, arrowsize = 0.5]\n  a -> l [label = \"Growth\"]\n  l -> d [label = \"Mortality\"]\n  l -> li [label = \"Litterfall\"]\n  d -> li [label = \"Deadfall\"]\n  li -> s [label = \"Decomposition\"]\n  {li, d, s} -> a [label = \"Emission\"]\n  l -> a [label = \"Emission\", color = red]\n  l -> hwp [label = \"Harvest\", color = red]\n                  {rank = same; hwp, a}\n                  {rank = same; l, d, li, s}\n\n\n  }","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figure 1.2: Example of a simple carbon stock-flow model for coniferous forests.
+</p>
+</div>
+</div>
+<div id="representation-of-space" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Representation of space</h2>
+<p>The LUCAS model can be configured as either a spatially explicit or spatially referenced model. Spatially explicit models use raster grids to represent real locations in geographic space. Alternatively, spatially referenced models use a series of spatial strata (e.g. ecological regions, administrative boundaries) to generalize the model inputs. Results from a spatially referenced model provide totals for a given strata, but not any additional detail within the strata, whereas spatially explicit models provide output results at the same raster resolution as the spatial inputs. Given this flexibility, LUCAS can be used to simulate carbon dynamics from a single stand up to landscapes containing tens of millions of cells.</p>
+<div class="figure"><span style="display:block;" id="fig:spatialexample"></span>
+<img src="_main_files/figure-html/spatialexample-1.png" alt="Example of a spatially referenced model input (left) and a spatially explicit model (right)." width="672" />
+<p class="caption">
+Figure 1.3: Example of a spatially referenced model input (left) and a spatially explicit model (right).
+</p>
+</div>
+</div>
+<div id="representation-of-time" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> Representation of time</h2>
+<p>The LUCAS model runs on an annual timestep. Both STSM and SF parameters are derived at this scale. For example, rates of LULC change are defined as the rate of change – as either an explicit area or probability – occurring between two successive years. Within the stock-flow model, carbon fluxes are defined as a proportion of the “from stock” transferred to the “to stock” each year.</p>
+<p>Conceptually there is no reason why models could not be developed with shorter or longer temporal intervals. For example, a model could be developed to use monthly climate data in an effort to model wildfire patterns across an ecosystem. This may be advantageous if the goal of the modeling effort is to represent temporal dynamics of fire behavior in response to variability in weather patterns within a year. Conversely, models could be developed to operate on decadal scales when the processes considered allow for that level of temporal aggregation. For example, data from global integrated assessment models could be used to provide decadal estimates of urbanization over long temporal periods.</p>
+</div>
+<div id="uncertainty" class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> Uncertainty</h2>
+<p>Various types of uncertainty can be incorporated into the LUCAS model. Different categories of uncertainty include user input data, ecological processes, and model algorithms. Within LUCAS, virtually all parameters can be assigned statistical distributions, which in turn can be sampled using Monte Carlo methods.</p>
+<div id="user-input-data" class="section level3" number="1.5.1">
+<h3><span class="header-section-number">1.5.1</span> User input data</h3>
+</div>
+<div id="ecological-processes" class="section level3" number="1.5.2">
+<h3><span class="header-section-number">1.5.2</span> Ecological processes</h3>
+</div>
+<div id="model-algorithms" class="section level3" number="1.5.3">
+<h3><span class="header-section-number">1.5.3</span> Model algorithms</h3>
+</div>
+</div>
+<div id="structure-of-lucas" class="section level2" number="1.6">
+<h2><span class="header-section-number">1.6</span> Structure of LUCAS</h2>
+<p>The LUCAS model uses national remote sensing products to drive historical rates of change. The carbon stock-flow model was developed by linking the CBM-CFS3 model to derive a range of carbon flux parameters.</p>
+<div class="figure"><span style="display:block;" id="fig:lucasstructure"></span>
+<div id="htmlwidget-56dd744430c961963d0b" style="width:672px;height:480px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-56dd744430c961963d0b">{"x":{"diagram":"digraph {\n  graph [layout = dot, rankdir = TB]\n  \n  node [shape = rectangle, width=1, fontname = Helvetica, fixedsize = true, fontsize = 8]       \n  setup [label = \"Model Set-up\"]\n  scenario [label = \"Define scenarios\"]\n  run [label =  \"Run simulations\"]\n  post [label =  \"Post Processing\"]\n  \n  # edge definitions with the node IDs\n  edge [fontname = Helvetica, fontsize = 8, color = black, arrowsize = 0.5]\n  setup -> scenario\n  scenario -> run\n  run -> post\n  post -> scenario\n                {rank = same; setup, scenario, run, post}\n\n  }","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figure 1.4: Structure and steps to building a LUCAS model
+</p>
+</div>
+<p>Using the LUCAS model require four general operational steps (Figure <a href="index.html#fig:lucasstructure">1.4</a>). Each step is described below.</p>
+<div id="model-set-up" class="section level3" number="1.6.1">
+<h3><span class="header-section-number">1.6.1</span> Model Set-up</h3>
+<p>A base LUCAS model is available which can be adapted for a wide range of user needs. The model contains a range of LULC transitions such as urbanization, agricultural expansion and contraction, forest harvest, wildfire, and insect/drought disturbance. The base model classifies forests into 28 forest type-groups based on the U.S. Forest Service classification system. For each forest type-group, a set of carbon stock-flow parameters are provided. Users need to define the following:</p>
+<ul>
+<li><p>Choose between using the LUCAS Base model or developing a custom model. The base model comes with a calibrated stock flow model for 28 forest type-groups. Developing a custom model requires additional steps, including:</p>
+<ul>
+<li><p>Obtaining merchantable volume curves,</p></li>
+<li><p>Running CBM-CFS3 to estimate live biomass carbon by forest age,</p></li>
+<li><p>Running the LUCAS CBM-CFS3 Flow Pathways module,</p></li>
+<li><p>Running the LUCAS Spin-up module.</p></li>
+</ul></li>
+<li><p>Defining the study area and model strata,</p></li>
+<li><p>Determining whether the model will be spatially explicit or spatially referenced,</p></li>
+<li><p>Define the temporal period of analysis (historical and/or future projections),</p></li>
+<li><p>Defining a LULC classification system and set of LULC transitions.</p></li>
+</ul>
+</div>
+<div id="define-scenarios" class="section level3" number="1.6.2">
+<h3><span class="header-section-number">1.6.2</span> Define Scenarios</h3>
+</div>
+<div id="run-simulations" class="section level3" number="1.6.3">
+<h3><span class="header-section-number">1.6.3</span> Run Simulations</h3>
+</div>
+<div id="post-processing" class="section level3" number="1.6.4">
+<h3><span class="header-section-number">1.6.4</span> Post Processing</h3>
+</div>
+</div>
+<div id="information-and-data-requirements" class="section level2" number="1.7">
+<h2><span class="header-section-number">1.7</span> Information and data requirements</h2>
+</div>
+<div id="bookdown-text---to-be-deleted" class="section level2" number="1.8">
+<h2><span class="header-section-number">1.8</span> Bookdown Text - to be deleted</h2>
+<p>You can render the HTML version of this example book without changing anything:</p>
+<ol style="list-style-type: decimal">
+<li><p>Find the <strong>Build</strong> pane in the RStudio IDE, and</p></li>
+<li><p>Click on <strong>Build Book</strong>, then select your output format, or select “All formats” if you’d like to use multiple formats from the same book source files.</p></li>
+</ol>
+<p>Or build the book from the R console:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" aria-hidden="true" tabindex="-1"></a>bookdown<span class="sc">::</span><span class="fu">render_book</span>()</span></code></pre></div>
+<p>To render this example to PDF as a <code>bookdown::pdf_book</code>, you’ll need to install XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <a href="https://yihui.org/tinytex/" class="uri">https://yihui.org/tinytex/</a>.</p>
+</div>
+<div id="preview-book" class="section level2" number="1.9">
+<h2><span class="header-section-number">1.9</span> Preview book</h2>
+<p>As you work, you may start a local server to live preview this HTML book. This preview will update as you edit the book when you save individual .Rmd files. You can start the server in a work session by using the RStudio add-in “Preview book,” or from the R console:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="index.html#cb2-1" aria-hidden="true" tabindex="-1"></a>bookdown<span class="sc">::</span><span class="fu">serve_book</span>()</span></code></pre></div>
+
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-daniel2016state" class="csl-entry">
+Daniel, Colin J, Leonardo Frid, Benjamin M Sleeter, and Marie-Josée Fortin. 2016. <span>“State-and-Transition Simulation Models: A Framework for Forecasting Landscape Change.”</span> <em>Methods in Ecology and Evolution</em> 7 (11): 1413–23.
+</div>
+<div id="ref-daniel2018integrating" class="csl-entry">
+Daniel, Colin J, Benjamin M Sleeter, Leonardo Frid, and Marie-Josée Fortin. 2018. <span>“Integrating Continuous Stocks and Flows into State-and-Transition Simulation Models of Landscape Change.”</span> <em>Methods in Ecology and Evolution</em> 9 (4): 1133–43.
+</div>
+<div id="ref-sleeter2018effects" class="csl-entry">
+Sleeter, Benjamin M., Jinxun Liu, Colin Daniel, Bronwyn Rayfield, Jason Sherba, Todd J Hawbaker, Zhiliang Zhu, Paul C Selmants, and Thomas R Loveland. 2018. <span>“Effects of Contemporary Land-Use and Land-Cover Change on the Carbon Balance of Terrestrial Ecosystems in the United States.”</span> <em>Environmental Research Letters</em> 13 (4): 045006.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="hello-bookdown.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/index.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
